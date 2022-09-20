@@ -1,0 +1,98 @@
+HTML(HyperText Markup Language)
+- 문서
+- 문서를 작성하는 방식
+<...> ... </...> 태그
+
+<!DOCTYPE html> -> HTML5 형식
+
+<head></head> : 문서에 대한 정보(출력되지 않는)
+<body></body> : 실제 출력되는 태그
+
+태그(요소 - Element)
+
+속성 - 태그에 있는 부가적인 정보
+<태그 이름=값 이름=값 이름=값>
+
+속성 - 특정 태그의 기능을 담당하는 속성
+     - 정보 전달을 위한 속성 (data-이름=값 - 권장사항)
+
+링크 이동
+a 태그
+  href -> 이동할 링크  
+  target -> 문서가 출력될 위치
+         _self -> 현재 창(기본 값)
+         _blank -> 새로운 창
+
+헤더 태그 - 제목
+<h1~6></h1~6>
+- 사이트 검색 최적화를 위해서는 헤더 태그를 이동
+
+문단
+p 
+
+HTML 서식(Text Formatting) 태그
+텍스트 서식을 표현할수 있는 태그
+- <b> 굵은 텍스트 정의
+- <em> 강조된 텍스트 정의
+- <i> 기울임 꼴 텍스트 정의
+- <small> 더 작은 텍스트 정의
+- <strong> 중요한 텍스트 정의 
+- <sub> 아래 첨자 텍스트 정의 
+- <sup> 윗 첨자 텍스트 정의 
+- <ins> 첨가 텍스트 정의 
+- <del> 지운 텍스트 정의 
+- <mark> 마킹 / 강조된 텍스트 정의
+
+HTML 인용, 인용문, 정의(Quotation and Citation Elements) 태그
+- <abbr> 약어(abbreviation) 및 머리 글자(acronym)를 정의
+- <address> 문서의 작성자 / 소유자에 대한 연락처 정보를 정의
+- <bdo> Defines the text direction
+- <blockquote> 다른 소스에서 인용되는 부분을 정의
+- <q> 인라인 (짧은) 인용을 정의
+- <cite> 작품의 제목을 정의합니다
+- <dfn> 정의 용어(definition term) 정의
+
+a 태그
+  href -> 이동할 링크  
+  target -> 문서가 출력될 위치
+         _self -> 현재 창(기본 값)
+         _blank -> 새로운 창
+         _parent -> 부모 창
+         _top -> 
+
+내부의 창 -> iframe
+
+상대경로 -> 현재 파일의 위치가 기준점 
+         -> .. -> 바로 상위 위치
+
+절대경로 -> 물리적 파일의 위치(C:\folder\image.png)
+
+리스트 태그
+  - 순서표기가 없는 리스트 -> ul
+  - 순서표기가 있는 리스트 -> ol
+
+HTML - 문서
+  Block - 그림, 표 ...
+        (공간 O) -> 너비, 높이
+              -> 외부 여백(상하좌우)
+              -> 내부 여백(상하좌우)
+        - div
+
+  Inline - 글 -> 공간 X -> 글 자간, 행간(여백)
+                       -> 외부여백(좌, 우 여백)
+         (너비, 높이 X)
+         - span
+
+form - 양식
+<form> 입력 태그 </form>
+
+입력 태그
+input
+    입력받는 형식
+    type ="text, checkbox, radio ..., submit"
+    name -> 입력한 데이터를 찾기위한 구분값
+textarea
+
+form
+    action - 양식을 제출할 경로(서버 주소)
+    target - _self, _blank, _parent, _top, iframe 이름
