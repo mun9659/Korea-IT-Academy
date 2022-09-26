@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
+http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+	<!-- 2개의 서블릿 관련을 web.xml 에 등록해야 서버를 통한 url 값으로 나타낼 수 있다 -->
+	<servlet> <!-- 서블릿 클래스 등록 -->
+		<servlet-name>servletEx01</servlet-name>
+		<servlet-class>servlet.Ex01</servlet-class>
+	</servlet>
+	<servlet-mapping> <!-- 서블릿 클래스를 URL 매칭(매핑) -->
+		<servlet-name>servletEx01</servlet-name>
+		<url-pattern>/ex01</url-pattern>
+	</servlet-mapping>
+</web-app>
