@@ -9,8 +9,8 @@ public class Ex02 {
 		ProxyCalculator cal1 = new ProxyCalculator(new ImpeCalculator());
 		ProxyCalculator cal2 = new ProxyCalculator(new RecCalculator());
 		
-		long result1 = cal1.factorial(10);
-		long result2 = cal2.factorial(10);
+		long result1 = cal1.factorial(20);
+		long result2 = cal2.factorial(20);
 		
 		System.out.printf("cal1 = %d%n", result1);
 		System.out.printf("cal2 = %d%n", result2);
