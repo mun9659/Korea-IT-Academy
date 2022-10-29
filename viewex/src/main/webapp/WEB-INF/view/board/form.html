@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	<main layout:fragment="content">
+		<form method="POST"  th:action="@{/board/write}">
+			제목 : <input type="text" name="subject" />
+			<button type="submit">작성</button>
+		</form>
+	</main>
+</html>
