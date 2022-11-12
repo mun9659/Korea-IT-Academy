@@ -3,16 +3,25 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/main}">
 	
-	<th:block layout:fragment="addCss">
-		<link rel="stylesheet" type="text/html" href="/test1.css">
-	</th:block>
-	
-	<th:block layout:fragment="addScript">
-		<script src="/test1.js"></script>
-	</th:block>
-	
 	<main layout:fragment="content">
-		<h1>본문!!!</h1>
+		<form method="post" th:action="@{/member/login}" th:object="${loginRequest}" autocomplete="off">
+			<div th:each="err : ${#fields.globalErrors()}"  th:text="${err}"></div>
+			<dl>
+				<dt th:text="#{member.memId}"></dt>
+				<dd>
+					<input type="text" name="memId" th:field="*{memId}">
+					<div th:each="err : ${#fields.errors('memId')}" th:text="${err}"></div>
+				</dd>
+			</dl>
+			<dl>
+				<dt th:text="#{member.memPw}"></dt>
+				<dd>
+					<input type="password" name="memPw" th:field="*{memPw}">
+					<div th:each="err : ${#fields.errors('memPw')}" th:text="${err}"></div>
+				</dd>
+			</dl>
+			<button type="submit" th:text="#{member.login}"></button>
+		</form>
 	</main>
 	
 </html>

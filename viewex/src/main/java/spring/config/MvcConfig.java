@@ -2,8 +2,11 @@ package spring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -18,6 +21,7 @@ import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 
 @Configuration
 @EnableWebMvc
+@Import(DbConfig.class)
 public class MvcConfig implements WebMvcConfigurer {
 	
 	@Autowired
@@ -30,9 +34,11 @@ public class MvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// 정적 경로 -> 이미지, CSS, js 파일 업로드
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+		// 정적 경로 -> 이미지, CSS, js, 파일 업로드 
+		registry.addResourceHandler("/**")
+				.addResourceLocations("classpath:/static/");
 	}
+	
 	
 	@Bean
 	public SpringResourceTemplateResolver templateResolver() {
@@ -62,10 +68,18 @@ public class MvcConfig implements WebMvcConfigurer {
 		resolver.setTemplateEngine(templateEngine());
 		return resolver;
 	}
-	
+		
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		registry.viewResolver(thymeleafViewResolver());
 	}
 	
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+		ms.setBasename("messages.message");
+		ms.setDefaultEncoding("UTF-8");
+		
+		return ms;
+	}
 }

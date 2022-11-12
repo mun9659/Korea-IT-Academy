@@ -1,25 +1,47 @@
 package controllers.members;
 
-import java.time.LocalDateTime;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import models.member.Member;
+import services.member.JoinService;
 
 @Controller
+@RequestMapping("/member")
 public class JoinController {
-	@GetMapping("/member/form")
-	public String form(Model model) {
-		Member member = new Member();
-		member.setMemId("user01");
-		member.setMemNm("사용자01");
-		member.setEmail("user01@test.org");
-		member.setMobile("010-0000-0000");
-		member.setIntro("<h1>자기소개!</h1>");
-		member.setRegDt(LocalDateTime.now());
-		model.addAttribute("member", member);
-		return "member/form";
+	
+	@Autowired
+	private JoinService joinService;
+	
+	@GetMapping("/join") // /member/join
+	public String join(Model model) {
+		 
+		JoinRequest joinRequest = new JoinRequest();
+		model.addAttribute("joinRequest", joinRequest);
+		return "member/join";
+	 }
+	
+	@PostMapping("/join") // /member/join_ps
+	public String joinPs(@Valid JoinRequest joinRequest, Errors errors) { // @Valid 애노테이션 
+		
+		// javax.validation에서 체크할 수 없는 것을 넣어놓는다.
+		new JoinValidator().validate(joinRequest, errors);
+		
+		if(errors.hasErrors()) { // 검증 실패가 1개 이상 있다면
+			return "member/join";
+		}
+		
+		// 검증 성공 -> 가입 처리
+		joinRequest.setMemId("user01");
+		joinService.process(joinRequest);
+		
+		return "redirect:/member/login";
 	}
 }
