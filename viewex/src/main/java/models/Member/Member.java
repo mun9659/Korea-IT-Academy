@@ -2,14 +2,22 @@ package models.Member;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Member {
 	private long memNo;
 	private String memId;
+	
+	// RestController로 Json 표시할 때 무시하도록 하는 애노테이션
+	@JsonIgnore
 	private String memPw;
 	private String memNm;
 	private String email;
 	private String mobile;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime regDt;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime modDt;
 	
 	public long getMemNo() {

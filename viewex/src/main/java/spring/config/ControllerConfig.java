@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-@ComponentScan("controllers")
+@ComponentScan({"controllers", "restcontrollers"})
 public class ControllerConfig {
 
 }

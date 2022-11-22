@@ -1,7 +1,5 @@
 package models.Member;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,6 +13,23 @@ import org.springframework.stereotype.Component;
 public class MemberDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	private RowMapper<Member> rowMapper = (rs, i) -> {
+		Member member = new Member();
+		
+		member.setMemNo(rs.getLong("memNo"));
+		member.setMemId(rs.getString("memId"));
+		member.setMemPw(rs.getString("memPw"));
+		member.setMemNm(rs.getString("memNm"));
+		member.setEmail(rs.getString("email"));
+		member.setMobile(rs.getString("mobile"));
+		member.setRegDt(rs.getTimestamp("regDt").toLocalDateTime());
+		Timestamp modDt = rs.getTimestamp("modDt");
+		if(modDt != null) {
+			member.setModDt(modDt.toLocalDateTime());
+		}
+		return member;
+	};
 	
 	public boolean register(Member member) {
 		String sql = "INSERT INTO member(memId, memPw, memNm, email, mobile) " +
@@ -43,25 +58,17 @@ public class MemberDao {
 			String sql = "SELECT * FROM member WHERE memId = ?";
 			// queryForObject : 데이터가 없으면 에러 발생한다
 			Member _member = 
-					jdbcTemplate.queryForObject(sql, (rs, i) -> {
-						Member member = new Member();
-						
-						member.setMemNo(rs.getLong("memNo"));
-						member.setMemId(rs.getString("memId"));
-						member.setMemPw(rs.getString("memPw"));
-						member.setMemNm(rs.getString("memNm"));
-						member.setEmail(rs.getString("email"));
-						member.setMobile(rs.getString("mobile"));
-						member.setRegDt(rs.getTimestamp("regDt").toLocalDateTime());
-						Timestamp modDt = rs.getTimestamp("modDt");
-						if(modDt != null) {
-							member.setModDt(modDt.toLocalDateTime());
-						}
-						return member;
-					}, memId);
+					jdbcTemplate.queryForObject(sql, rowMapper, memId);
+			
+			if(_member == null) {
+				throw new RuntimeException("회원 없음!");
+			}
 			
 			return _member;
 		} catch (Exception e) {
+			if (e instanceof RuntimeException) {
+				throw e;
+			}
 			return null;
 		}
 		
@@ -91,5 +98,10 @@ public class MemberDao {
 		*/
 		
 		// Member member = members == null ? null : members.get(0);
+	}
+	
+	public List<Member> gets() {
+		List<Member> members = jdbcTemplate.query("SELECT * FROM member", rowMapper);
+		return members;
 	}
 }

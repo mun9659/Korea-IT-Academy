@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+			layout:decorates="~{layouts/main}">
+	<main layout:fragment="content">
+		<form method="get" th:object="${searchRequest}">
+			가입일 
+			<input type="text" name="sdate" th:field="*{sdate}">
+			<span th:each="err : ${#fields.errors('sdate')}" th:text="${err}"></span>
+			~ 
+			<input type="text" name="edate" th:field="*{edate}">
+			<span th:each="err : ${#fields.errors('edate')}" th:text="${err}"></span>
+			
+			<button type="submit">조회하기</button>
+		</form>
+	</main>
+</html>

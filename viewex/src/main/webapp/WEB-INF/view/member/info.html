@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org"
+	xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/main}">
+	
+	<main layout:fragment="content">
+		<th:block th:object="${member}">
+			<dl>
+				<dt th:text="#{member.memId}"></dt>
+				<dd th:text="*{memId}"></dd>
+			</dl>
+			<dl>
+				<dt th:text="#{member.memNm}"></dt>
+				<dd th:text="*{memNm}"></dd>
+			</dl>
+			<dl>
+				<dt th:text="#{member.email}"></dt>
+				<dd th:text="*{email}"></dd>
+			</dl>
+			<dl>
+				<dt th:text="#{member.mobile}"></dt>
+				<dd th:text="*{mobile}"></dd>
+			</dl>
+			<dl>
+				<dt>가입일시</dt>
+				<dd th:text="*{#temporals.format(regDt, 'yyyy-MM-dd HH:mm')}"></dd>
+			</dl>
+		</th:block>
+	</main>
+</html>

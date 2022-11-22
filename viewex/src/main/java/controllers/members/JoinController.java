@@ -39,7 +39,6 @@ public class JoinController {
 		}
 		
 		// 검증 성공 -> 가입 처리
-		// joinRequest.setMemId("user01");
 		joinService.process(joinRequest);
 		
 		return "redirect:/member/login";
