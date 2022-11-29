@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title th:text="${siteTitle}">팝업!!!</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/popup.css}">
+		<link rel="stylesheet" type="text/css"  th:each="css : ${addCss}"  th:href="@{/css/{replace}.css(replace=${css})}"/>
+		<th:block layout:fragment="addCss"></th:block>
+		<script th:src="@{/js/common.js}"></script>
+		<script th:each="script : ${addScript}" th:src="@{/js/{replace}.js(replace=${script})}"></script>
+		<th:block layout:fragment="addScript"></th:block>
+	</head>
+	<body>
+		<main layout:fragment="content"></main>
+	</body>
+</html>

@@ -2,12 +2,15 @@ package models.file;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class FileInfo {
 	private long id;
 	private String gid;
 	private String fileName;
 	private String fileType;
 	private boolean isSuccess;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime regDt;
 	
 	public long getId() {
